@@ -22,38 +22,46 @@ void inputCommand(string *buffer) {
     std::cout << "> ";
     std::getline(std::cin, *buffer);
 }
-
 void initRooms() {
-    auto *r2 = new Room(&r2name, &r2desc);
-    auto *r1 = new Room(&r1name, &r1desc);
-    auto *r3 = new Room(&r3name, &r3desc);
-    auto *r4 = new Room(&r4name, &r4desc);
-    auto *r5 = new Room(&r5name, &r5desc);
-    auto *r6 = new Room(&r6name, &r6desc);
+    const int numRooms = 6;
+    Room* rooms[numRooms];
+    for (int i = 0; i < numRooms; ++i) {
+        rooms[i] = new Room(&rooms_name[i], &rooms_desc[i]); // Create a new room
+        Room::addRoom(rooms[i]);
+    }
 
-    // Add rooms to the global list
-    Room::addRoom(r1);
-    Room::addRoom(r2);
-    Room::addRoom(r3);
-    Room::addRoom(r4);
-    Room::addRoom(r5);
-    Room::addRoom(r6);
+    rooms[0]->setNorth(rooms[2]);
+    rooms[0]->setWest(rooms[3]);
+    rooms[0]->setSouth(rooms[4]);
+    rooms[0]->setEast(rooms[1]);
 
-    r1->setNorth(r3);
-    r1->setWest(r4);        r1->addObject(new GameObject("Pencil","A simple pencil","pencil"));
-    r1->setSouth(r5);
-    r1->setEast(r2);
+    rooms[1]->setWest(rooms[0]);
 
-    r2->setWest(r1);
+    rooms[2]->setSouth(rooms[0]);
 
-    r3->setSouth(r1);       r3->addObject(new GameObject("Key","A Mysterious Key","key"));
+    rooms[3]->setEast(rooms[0]);
 
-    r4->setEast(r1);
+    rooms[4]->setSouth(rooms[5]);
+    rooms[4]->setNorth(rooms[0]);
 
-    r5->setSouth(r6);
-    r5->setNorth(r1);
+    rooms[5]->setNorth(rooms[4]);
+    // Add objects to rooms
+    rooms[0]->addObject(new GameObject("Lamp", "An old lamp with a flickering light.", "lamp"));
+    rooms[0]->addObject(new GameObject("Table", "A wooden table with some papers scattered on it.", "table"));
 
-    r6->setNorth(r5);
+    rooms[2]->addObject(new GameObject("Painting", "A mysterious painting hanging on the wall.", "painting"));
+
+    rooms[2]->addObject(new GameObject("Knife", "A sharp kitchen knife on the countertop.", "knife"));
+    rooms[2]->addObject(new GameObject("Book", "An ancient book with a worn leather cover.", "book"));
+
+    rooms[3]->addObject(new GameObject("Bed", "A neatly made bed with a dark, velvet cover.", "bed"));
+    rooms[3]->addObject(new GameObject("Mirror", "An ornate mirror reflecting your image.", "mirror"));
+
+    rooms[4]->addObject(new GameObject("Bookshelf", "A tall bookshelf filled with ancient tomes.", "bookshelf"));
+    rooms[4]->addObject(new GameObject("Crystal", "A sparkling crystal resting on a pedestal.", "crystal"));
+
+    rooms[5]->addObject(new GameObject("Candlestick", "An ornate candlestick on a small pedestal.", "candlestick"));
+    rooms[5]->addObject(new GameObject("Scroll", "A rolled-up scroll with a mysterious seal.", "scroll"));
 }
 
 //Sets up the game state.
@@ -166,7 +174,7 @@ void gameLoop() {
         if (commandBuffer.find(' ') != std::string::npos) {
             secondWord = commandBuffer.substr(endOfVerb + 1);  // Add 1 to skip the space
         } else {
-            secondWord = "";  // No space, set secondWord to an empty string or handle it as needed
+            secondWord = "";  // No space, set secondWord to an empty string
         }
         Room *room = nullptr;
         commandOk = false;
@@ -193,7 +201,7 @@ void gameLoop() {
         } else if (command == "examine") {
             examineObject(secondWord);  commandOk = true;
         }
-        if(secondWord != ""){}
+        if(secondWord != "" && commandOk){}
         else if (commandOk) {
             if(command == "examine" ||command == "inventory" ||command == "get" ||command == "drop"){}
             else if (room)

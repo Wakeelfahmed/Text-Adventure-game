@@ -58,11 +58,6 @@ void Room::addRoom(Room* room) { Room::rooms.push_back(room); }
  * @return The room that is north of this one, or NULL if there is no exit.
  */
 Room* Room::getNorth() const { return this->north; }
-
-/**
- * Sets the north exit of a room.
- * @param _north Pointer to the room to be north of this one.
- */
 void Room::setNorth(Room* _north) { this->north = _north; }
 Room* Room::getEast() const { return this->east; } // Accessor method for east exit
 Room* Room::getSouth() const { return this->south; } // Accessor method for south exit
@@ -71,7 +66,6 @@ void Room::setEast(Room* _east) { this->east = _east; }
 void Room::setSouth(Room* _south) { this->south = _south; }
 void Room::setWest(Room* _west) { this->west = _west; }
 
-
 void Room::addObject(GameObject* object) { objects.push_back(object); }
-const std::list<GameObject*>& Room::getObjects() const { return objects; }
-std::list<GameObject*>& Room::getObjectsMutable() { return objects; }
+//const std::list<GameObject*>& Room::getObjects() const { return objects; }
+//std::list<GameObject*>& Room::getObjectsMutable() { return objects; }
