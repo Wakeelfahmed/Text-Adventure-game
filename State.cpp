@@ -1,10 +1,6 @@
 #include "State.h"
 
 /**
- * Current state of the game.
- */
-
-/**
  * Display the description of the room the player is in. */
 void State::announceLoc() const { this->currentRoom->describe(); }
 
@@ -22,6 +18,7 @@ void State::goTo(Room *target) {
     this->currentRoom = target;
     this->announceLoc();
 }
+void State::set_room(Room *target) { this->currentRoom = target; }
 
 /**
  * Return a pointer to the current room.
@@ -29,12 +26,7 @@ void State::goTo(Room *target) {
  */
 Room *State::getCurrentRoom() const { return this->currentRoom; }
 void State::addObjectToInventory(GameObject *object) { inventory.push_back(object); }
-//const std::list<GameObject *> &State::getInventory() const { return inventory; }
-//std::list<GameObject *> &State::getInventory() { return inventory; }
-const std::list<GameObject*>& State::getInventory() const {
-    return inventory;
-}
+const std::list<GameObject*>& State::getInventory() const { return inventory; }
+void State::removeObjectFromInventory(GameObject* object) { inventory.remove(object); }
 
-void State::removeObjectFromInventory(GameObject* object) {
-    inventory.remove(object);
-}
+void State::Clear_Inventory(){ inventory.clear(); }

@@ -8,12 +8,14 @@ class State {
 public:
     explicit State(Room *startRoom);
     void goTo(Room *target);
+    void set_room(Room *target);
     void announceLoc() const;
     Room* getCurrentRoom() const;
 
     void addObjectToInventory(GameObject* object);
     void removeObjectFromInventory(GameObject* object);
     const std::list<GameObject*>& getInventory() const;
+    void Clear_Inventory();
 };
 
 #endif //TEXTADV_STATE_H

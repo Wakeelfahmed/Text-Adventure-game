@@ -8,6 +8,7 @@ std::list<Room*> Room::rooms; // Stores a static list of all rooms.
  * @param _name Room's name.
  * @param _desc Room's description.
  */
+Room::Room() : north(nullptr), south(nullptr), east(nullptr), west(nullptr) {}
 Room::Room(const string* _name, const string* _desc) :	name(_name), description(_desc), north(nullptr), east(nullptr), south(nullptr), west(nullptr) {}
 
 Room::~Room() {	Room::rooms.remove(this); }     //Remove destroyed rooms from the static list.
@@ -53,6 +54,7 @@ Room* Room::addRoom(const string* _name, const string* _desc) {
  */
 void Room::addRoom(Room* room) { Room::rooms.push_back(room); }
 
+
 /**
  * Gets the north exit of a room.
  * @return The room that is north of this one, or NULL if there is no exit.
@@ -67,5 +69,6 @@ void Room::setSouth(Room* _south) { this->south = _south; }
 void Room::setWest(Room* _west) { this->west = _west; }
 
 void Room::addObject(GameObject* object) { objects.push_back(object); }
-//const std::list<GameObject*>& Room::getObjects() const { return objects; }
-//std::list<GameObject*>& Room::getObjectsMutable() { return objects; }
+std::list<GameObject*>& Room::getObjects() { return objects; }
+
+void Room::Clear_room_objects() { objects.clear(); }

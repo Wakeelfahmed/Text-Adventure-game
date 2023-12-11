@@ -24,7 +24,7 @@ public:
      * @param _name Name of the room.
      * @param _desc Description of the room.
      */
-    Room() : north(nullptr), south(nullptr), east(nullptr), west(nullptr) {}
+    Room();
 
     Room(const string *_name, const string *_desc);
 
@@ -54,9 +54,9 @@ public:
     void setWest(Room *_west);
 
     void addObject(GameObject *object);
-    std::list<GameObject *> &getObjects() { return objects; }
-    //const std::list<GameObject *> &getObjects() const { return objects; }
-    std::list<GameObject *> &getObjectsMutable() { return objects; }
+    std::list<GameObject *> &getObjects();
+
+    void Clear_room_objects();
 };
 
 #endif //TEXTADV_ROOM_H

@@ -10,11 +10,10 @@ class GameObject {
     std::string keyword;
 
 public:
-    GameObject(const std::string& _shortName, const std::string& _longDescription, const std::string& _keyword)
-            : shortName(_shortName), longDescription(_longDescription), keyword(_keyword) {}
+    GameObject(const std::string& _shortName, const std::string& _longDescription, const std::string& _keyword);
 
-    const std::string& getShortName() const{ return shortName; }
-    const std::string& getLongDescription() const{ return longDescription; }
-    const std::string& getKeyword() const{ return keyword; }
+    const std::string& getShortName() const;
+    const std::string& getLongDescription() const;
+    const std::string& getKeyword() const;
 };
 #endif // TEXTADV_GAMEOBJECT_H
